@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, Box, IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 const Navbar = () => {
-  const { mode } = useTheme();
+  const { mode, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
@@ -52,6 +54,11 @@ const Navbar = () => {
           Todo App
         </Typography>
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Tooltip title={mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}>
+            <IconButton onClick={toggleTheme} color="inherit" sx={{ mr: 2 }}>
+              {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
+            </IconButton>
+          </Tooltip>
           {isAuthenticated ? (
             <>
               <Typography

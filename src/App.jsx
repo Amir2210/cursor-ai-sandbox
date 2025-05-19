@@ -58,13 +58,6 @@ function App() {
             element={
               <PrivateRoute>
                 <Container maxWidth="md" sx={{ py: 4 }}>
-                  <Box display="flex" justifyContent="flex-end" alignItems="center" mb={2}>
-                    <Tooltip title={mode === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}>
-                      <IconButton onClick={toggleTheme} color="inherit">
-                        {mode === 'light' ? <DarkModeIcon /> : <LightModeIcon />}
-                      </IconButton>
-                    </Tooltip>
-                  </Box>
                   <TodoList />
                 </Container>
               </PrivateRoute>
