@@ -142,8 +142,14 @@ const TodoList = () => {
 
   return (
     <Container maxWidth="md" sx={{ mt: 4 }}>
-      <Paper elevation={3} sx={{ p: 3 }}>
-        <Typography variant="h4" gutterBottom>
+      <Paper elevation={6} sx={{
+        p: 3,
+        bgcolor: '#23283a', // Dark background for the main paper
+        color: 'white', // Set text color to white
+        borderRadius: 3,
+        boxShadow: '0 0 20px rgba(25, 118, 210, 0.8)', // Enhanced subtle blue glow
+      }}>
+        <Typography variant="h4" gutterBottom sx={{ color: 'white', textShadow: '0 0 10px rgba(255,255,255,0.5)' }}> {/* Ensure title is white with subtle glow */}
           My Todo List
         </Typography>
 
@@ -156,6 +162,13 @@ const TodoList = () => {
               value={newTodo.title}
               onChange={(e) => setNewTodo({ ...newTodo, title: e.target.value })}
               required
+              InputLabelProps={{ sx: { color: '#aaa' } }} // Label color
+              InputProps={{ sx: { color: 'white' } }} // Input text color
+              sx={{
+                '& .MuiOutlinedInput-notchedOutline': { borderColor: '#555' },
+                '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2' },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2', boxShadow: '0 0 8px rgba(25, 118, 210, 0.5)' }, // Focus glow
+              }}
             />
             <TextField
               fullWidth
@@ -165,13 +178,28 @@ const TodoList = () => {
               onChange={(e) => setNewTodo({ ...newTodo, description: e.target.value })}
               multiline
               rows={2}
+              InputLabelProps={{ sx: { color: '#aaa' } }} // Label color
+              InputProps={{ sx: { color: 'white' } }} // Input text color
+              sx={{
+                '& .MuiOutlinedInput-notchedOutline': { borderColor: '#555' },
+                '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2' },
+                '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2', boxShadow: '0 0 8px rgba(25, 118, 210, 0.5)' }, // Focus glow
+              }}
             />
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               <DateTimePicker
                 label="Due Date"
                 value={newTodo.dueDate}
                 onChange={(newValue) => setNewTodo({ ...newTodo, dueDate: newValue })}
-                renderInput={(params) => <TextField {...params} fullWidth />}
+                renderInput={(params) => <TextField {...params}
+                  InputLabelProps={{ sx: { color: '#aaa' } }} // Label color
+                  InputProps={{ sx: { color: 'white' } }} // Input text color
+                  sx={{
+                    '& .MuiOutlinedInput-notchedOutline': { borderColor: '#555' },
+                    '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2' },
+                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2', boxShadow: '0 0 8px rgba(25, 118, 210, 0.5)' }, // Focus glow
+                  }}
+                  fullWidth />}
               />
             </LocalizationProvider>
             <Button
@@ -179,6 +207,7 @@ const TodoList = () => {
               variant="contained"
               color="primary"
               fullWidth
+              sx={{ boxShadow: '0 0 12px rgba(25, 118, 210, 0.8)' }} // Primary button enhanced glow
             >
               Add Todo
             </Button>
@@ -191,16 +220,20 @@ const TodoList = () => {
               key={todo.id}
               sx={{
                 mb: 1,
-                bgcolor: 'background.paper',
+                bgcolor: '#1a202c', // Dark background for list items
                 borderRadius: 1,
                 '&:hover': {
-                  bgcolor: 'action.hover'
-                }
+                  bgcolor: '#283548', // Slightly lighter dark on hover
+                  boxShadow: todo.completed ? 'none' : '0 0 8px rgba(25, 118, 210, 0.6)', // Enhanced glow on hover for incomplete
+                },
+                boxShadow: todo.completed ? 'none' : '0 0 4px rgba(25, 118, 210, 0.4)', // Subtle glow for incomplete tasks
+                transition: 'box-shadow 0.3s ease-in-out', // Smooth transition
               }}
             >
               <Checkbox
                 checked={todo.completed}
                 onChange={() => handleToggleTodo(todo.id, todo.completed)}
+                sx={{ color: todo.completed ? '#aaa' : '#1976d2', '&.Mui-checked': { color: '#aaa' } }} // Adjust checkbox color and checked state
               />
               <ListItemText
                 primary={
@@ -208,7 +241,7 @@ const TodoList = () => {
                     variant="h6"
                     sx={{
                       textDecoration: todo.completed ? 'line-through' : 'none',
-                      color: todo.completed ? 'text.secondary' : 'text.primary'
+                      color: todo.completed ? '#aaa' : 'white' // Adjust primary text color
                     }}
                   >
                     {todo.title}
@@ -217,18 +250,18 @@ const TodoList = () => {
                 secondary={
                   <Box>
                     {todo.description && (
-                      <Typography variant="body2" color="text.secondary" component="div">
+                      <Typography variant="body2" color="#aaa" component="div"> {/* Adjust secondary text color */}
                         {todo.description}
                       </Typography>
                     )}
                     {todo.dueDate && (
-                      <Typography variant="body2" color="text.secondary" component="div">
+                      <Typography variant="body2" color="#aaa" component="div"> {/* Adjust secondary text color */}
                         Due: {new Date(todo.dueDate).toLocaleDateString()}
                       </Typography>
                     )}
-                    <Typography variant="caption" color="text.secondary" component="div">
-                      Created by: {todo.User?.username}
-                    </Typography>
+                    {/* <Typography variant="caption" color="#aaa" component="div"> */}
+                    {/* Created by: {todo.User?.username} */}
+                    {/* </Typography> */}
                   </Box>
                 }
               />
@@ -243,7 +276,7 @@ const TodoList = () => {
                     description: todo.description || '',
                     dueDate: todo.dueDate ? new Date(todo.dueDate) : null
                   })}
-                  sx={{ mr: 1 }}
+                  sx={{ mr: 1, color: '#aaa', '&:hover': { color: '#1976d2' } }} // Adjust icon color and hover
                 >
                   <EditIcon />
                 </IconButton>
@@ -251,6 +284,7 @@ const TodoList = () => {
                   edge="end"
                   aria-label="delete"
                   onClick={() => handleDeleteTodo(todo.id)}
+                  sx={{ color: '#aaa', '&:hover': { color: '#dc004e' } }} // Adjust icon color and hover (red for delete)
                 >
                   <DeleteIcon />
                 </IconButton>
@@ -264,8 +298,11 @@ const TodoList = () => {
           onClose={() => setEditDialog({ open: false, todo: null, title: '', description: '', dueDate: null })}
           maxWidth="sm"
           fullWidth
+          PaperProps={{
+            sx: { bgcolor: '#23283a', color: 'white', boxShadow: '0 0 20px rgba(25, 118, 210, 0.8)', borderRadius: 3 } // Dark background and enhanced glow for dialog
+          }}
         >
-          <DialogTitle>Edit Todo</DialogTitle>
+          <DialogTitle sx={{ color: 'white', textShadow: '0 0 10px rgba(255,255,255,0.5)' }}>Edit Todo</DialogTitle>
           <DialogContent>
             <Stack spacing={2} sx={{ mt: 1 }}>
               <TextField
@@ -275,6 +312,13 @@ const TodoList = () => {
                 value={editDialog.title}
                 onChange={(e) => setEditDialog({ ...editDialog, title: e.target.value })}
                 required
+                InputLabelProps={{ sx: { color: '#aaa' } }} // Label color
+                InputProps={{ sx: { color: 'white' } }} // Input text color
+                sx={{
+                  '& .MuiOutlinedInput-notchedOutline': { borderColor: '#555' },
+                  '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2' },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2', boxShadow: '0 0 8px rgba(25, 118, 210, 0.5)' }, // Focus glow
+                }}
               />
               <TextField
                 fullWidth
@@ -283,22 +327,37 @@ const TodoList = () => {
                 onChange={(e) => setEditDialog({ ...editDialog, description: e.target.value })}
                 multiline
                 rows={2}
+                InputLabelProps={{ sx: { color: '#aaa' } }} // Label color
+                InputProps={{ sx: { color: 'white' } }} // Input text color
+                sx={{
+                  '& .MuiOutlinedInput-notchedOutline': { borderColor: '#555' },
+                  '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2' },
+                  '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2', boxShadow: '0 0 8px rgba(25, 118, 210, 0.5)' }, // Focus glow
+                }}
               />
               <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <DateTimePicker
                   label="Due Date"
                   value={editDialog.dueDate}
                   onChange={(newValue) => setEditDialog({ ...editDialog, dueDate: newValue })}
-                  renderInput={(params) => <TextField {...params} fullWidth />}
+                  renderInput={(params) => <TextField {...params}
+                    InputLabelProps={{ sx: { color: '#aaa' } }} // Label color
+                    InputProps={{ sx: { color: 'white' } }} // Input text color
+                    sx={{
+                      '& .MuiOutlinedInput-notchedOutline': { borderColor: '#555' },
+                      '&:hover .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2' },
+                      '&.Mui-focused .MuiOutlinedInput-notchedOutline': { borderColor: '#1976d2', boxShadow: '0 0 8px rgba(25, 118, 210, 0.5)' }, // Focus glow
+                    }}
+                    fullWidth />}
                 />
               </LocalizationProvider>
             </Stack>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => setEditDialog({ open: false, todo: null, title: '', description: '', dueDate: null })}>
+            <Button onClick={() => setEditDialog({ open: false, todo: null, title: '', description: '', dueDate: null })} sx={{ color: '#aaa' }}> {/* Adjust button text color */}
               Cancel
             </Button>
-            <Button onClick={handleEditTodo} variant="contained">
+            <Button onClick={handleEditTodo} variant="contained" color="primary"> {/* Keep primary color for save */}
               Save
             </Button>
           </DialogActions>

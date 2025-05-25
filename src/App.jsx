@@ -28,7 +28,7 @@ function App() {
   const { mode, toggleTheme } = useTheme();
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', bgcolor: '#1a202c' }}>
       <Navbar />
       <Box sx={{ flexGrow: 1 }}>
         <Routes>
@@ -57,9 +57,11 @@ function App() {
             path="/todos"
             element={
               <PrivateRoute>
-                <Container maxWidth="md" sx={{ py: 4 }}>
-                  <TodoList />
-                </Container>
+                <Box sx={{ background: 'linear-gradient(to bottom, #1a202c, #283548)', minHeight: '100%', py: 4 }}>
+                  <Container maxWidth="md">
+                    <TodoList />
+                  </Container>
+                </Box>
               </PrivateRoute>
             }
           />
