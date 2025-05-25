@@ -38,7 +38,13 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" color="primary" elevation={0}>
+    <AppBar
+      position="static"
+      sx={{
+        bgcolor: '#1a202c', // Dark background color
+        boxShadow: '0 2px 8px rgba(0,0,0,0.6)', // Subtle shadow
+      }}
+    >
       <Toolbar>
         <Typography
           variant="h6"
@@ -47,7 +53,7 @@ const Navbar = () => {
           sx={{
             flexGrow: 1,
             textDecoration: 'none',
-            color: 'inherit',
+            color: 'white', // Ensure text is white
             fontWeight: 'bold'
           }}
         >
@@ -65,7 +71,7 @@ const Navbar = () => {
                 variant="body1"
                 sx={{
                   mr: 2,
-                  color: 'inherit',
+                  color: 'white', // Ensure text is white
                   fontWeight: 500
                 }}
               >
@@ -119,6 +125,7 @@ const Navbar = () => {
                 variant="outlined"
                 sx={{
                   borderColor: 'white',
+                  color: 'white', // Ensure text is white
                   '&:hover': {
                     borderColor: 'white',
                     backgroundColor: 'rgba(255, 255, 255, 0.1)'
