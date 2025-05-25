@@ -188,45 +188,6 @@ const Landing = () => {
           </Box>
         </Paper>
       </Box>
-
-      {/* Features Section */}
-      <Container maxWidth="lg" sx={{ py: 8 }}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={4}>
-            <Box textAlign="center">
-              <CheckCircleOutlineIcon sx={{ fontSize: 60, color: 'primary.main', mb: 2 }} />
-              <Typography variant="h5" component="h3" gutterBottom>
-                Easy to Use
-              </Typography>
-              <Typography color="text.secondary">
-                Simple and intuitive interface to manage your tasks efficiently
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Box textAlign="center">
-              <SecurityIcon sx={{ fontSize: 60, color: 'primary.main', mb: 2 }} />
-              <Typography variant="h5" component="h3" gutterBottom>
-                Secure
-              </Typography>
-              <Typography color="text.secondary">
-                Your data is protected with secure authentication
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Box textAlign="center">
-              <SpeedIcon sx={{ fontSize: 60, color: 'primary.main', mb: 2 }} />
-              <Typography variant="h5" component="h3" gutterBottom>
-                Fast & Responsive
-              </Typography>
-              <Typography color="text.secondary">
-                Quick access to your tasks from any device
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
     </Box>
   );
 };
